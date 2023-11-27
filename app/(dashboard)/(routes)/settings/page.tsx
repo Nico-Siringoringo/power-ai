@@ -68,7 +68,7 @@ const SettingsPage = () => {
                     <FormDescription>
                       Open this <Link className="text-blue-700 underline" href="https://platform.openai.com/api-keys">account/api-keys</Link> and sign in with your openai account to get the API key.
                       This key is <b>only stored locally in your device</b>. <br></br>
-                      We recommend to <b>delete</b> your key after using this website.
+                      We recommend to <b>delete</b> your key after using this website. Click this link again <Link className="text-blue-700 underline" href="https://platform.openai.com/api-keys">account/api-keys</Link> and press delete button 
                     </FormDescription>
                   </FormItem>
                 )}
@@ -89,7 +89,7 @@ const SettingsPage = () => {
                     <FormDescription>
                       Open this <Link className="text-blue-700 underline" href="https://replicate.com/account/api-tokens">account/api-tokens</Link> and sign in with your github account to get the API key.
                       This key is <b>only stored locally in your device</b>. <br></br>
-                      We recommend to <b>delete</b> your key after using this website.
+                      We recommend to <b>delete</b> your key after using this website. Click this link again <Link className="text-blue-700 underline" href="https://replicate.com/account/api-tokens">account/api-tokens</Link> and press delete button
                     </FormDescription>
                   </FormItem>
                 )}
