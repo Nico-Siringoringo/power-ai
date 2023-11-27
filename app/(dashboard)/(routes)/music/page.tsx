@@ -18,6 +18,7 @@ import { useState } from "react";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
+import secureLocalStorage from "react-secure-storage";
 
 const MusicPage = () => {
   const router = useRouter();
@@ -36,7 +37,10 @@ const MusicPage = () => {
     try {
         setMusic(undefined);
 
-        const response = await axios.post("/api/music", values)
+        const response = await axios.post("/api/music", {
+            prompt: values.prompt,
+            api: secureLocalStorage.getItem('replicateapi')
+        })
 
         setMusic(response.data.audio);
         form.reset()

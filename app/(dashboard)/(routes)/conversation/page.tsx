@@ -3,8 +3,9 @@
 import * as z from "zod";
 import axios from "axios";
 import Heading from "@/components/heading"
+import secureLocalStorage from "react-secure-storage";
 import { useRouter } from "next/navigation";
-import { ChatCompletionMessage, ChatCompletionMessageParam, CreateChatCompletionRequestMessage } from "openai/resources/chat/index.mjs";
+import { ChatCompletionMessage, ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
 
 import { MessageCircle } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -45,6 +46,7 @@ const ConversationPage = () => {
 
         const response = await axios.post("/api/conversation", {
             messages: newMessages,
+            api: secureLocalStorage.getItem('openapi')
         })
 
         setMessages((current) => [...current, userMessage, response.data])

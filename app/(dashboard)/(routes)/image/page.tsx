@@ -21,6 +21,7 @@ import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from "@
 
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import secureLocalStorage from "react-secure-storage";
 
 const ImagePage = () => {
   const router = useRouter();
@@ -41,7 +42,12 @@ const ImagePage = () => {
     try {
         setImages([]);
 
-        const response = await axios.post("/api/image", values);
+        const response = await axios.post("/api/image", {
+            prompt: values.prompt,
+            style: values.style,
+            resolution: values.resolution,
+            api: secureLocalStorage.getItem('openapi')
+        });
 
         const urls = response.data.map((image: {url: string }) => image.url);
         setImages(urls);

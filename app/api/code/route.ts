@@ -1,16 +1,6 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-import { CreateChatCompletionRequestMessage } from "openai/resources/chat/index.mjs";
-
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-})
-
-const instructionMessage: OpenAI.Chat.ChatCompletionMessageParam = {
-    role: "system",
-    content: "You are a code generator. You must answer only in markdown code snippets. Use code comments for explanation."
-}
 
 export async function POST (
     req: Request
@@ -18,7 +8,16 @@ export async function POST (
     try {
         const { userId } = auth();
         const body = await req.json();
-        const { messages } = body;
+        const { messages, api } = body;
+
+        const openai = new OpenAI({
+            apiKey: api,
+        })
+        
+        const instructionMessage: OpenAI.Chat.ChatCompletionMessageParam = {
+            role: "system",
+            content: "You are a code generator. You must answer only in markdown code snippets. Use code comments for explanation."
+        }
         
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 });

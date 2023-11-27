@@ -18,6 +18,7 @@ import { useState } from "react";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
+import secureLocalStorage from "react-secure-storage";
 
 const VideoPage = () => {
   const router = useRouter();
@@ -36,7 +37,10 @@ const VideoPage = () => {
     try {
         setVideo(undefined);
 
-        const response = await axios.post("/api/video", values)
+        const response = await axios.post("/api/video", {
+            prompt: values.prompt,
+            api: secureLocalStorage.getItem('replicateapi')
+        })
 
         setVideo(response.data[0]);
         form.reset()

@@ -2,9 +2,7 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import Replicate from "replicate"
 
-const replicate = new Replicate({
-    auth: process.env.REPLICATE_API_TOKEN,
-});
+
 
 export async function POST (
     req: Request
@@ -12,7 +10,11 @@ export async function POST (
     try {
         const { userId } = auth();
         const body = await req.json();
-        const { prompt } = body;
+        const { prompt, api } = body;
+
+        const replicate = new Replicate({
+            auth: api,
+        });
         
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 });

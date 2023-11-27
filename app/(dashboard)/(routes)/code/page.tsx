@@ -22,6 +22,7 @@ import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
+import secureLocalStorage from "react-secure-storage";
 
 const CodePage = () => {
   const router = useRouter();
@@ -46,6 +47,7 @@ const CodePage = () => {
 
         const response = await axios.post("/api/code", {
             messages: newMessages,
+            api: secureLocalStorage.getItem('openapi')
         })
 
         setMessages((current) => [...current, userMessage, response.data])
